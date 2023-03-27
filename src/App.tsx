@@ -6,7 +6,7 @@ import { LoginScreen } from 'screens/login';
 function App() {
   return (
     <div className="App">
-      <LoginScreen />
+      {<LoginScreen />}
       {/* <ProjectListScreem /> */}
     </div>
   );

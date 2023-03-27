@@ -7,10 +7,11 @@ export interface User {
   email: string;
   title: string;
   organization: string;
+  token: string;
 }
 
 interface SearchPanelProps {
-  users: User[];//users是User类型的数组 比如user[0]就包含一个有id name email title organization
+  users: User[]; //users是User类型的数组 比如user[0]就包含一个有id name email title organization
   param: {
     name: string;
     personId: string;
