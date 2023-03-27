@@ -7,7 +7,7 @@ import { cleanObject, useDebounce, useMount } from 'utils';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
-export const ProjectListScreem = () => {
+export const ProjectListScreen = () => {
   const [param, setParam] = useState({
     name: '',
     personId: '',
