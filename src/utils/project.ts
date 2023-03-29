@@ -5,11 +5,11 @@ import { useHttp } from './http';
 import { useAsync } from './use-async';
 
 export const useProjects = (param?: Partial<Project>) => {
-  const { run, ...result } = useAsync<Project[]>();
-  //以上两个初始化都直接通过fetch请求得到的
   const client = useHttp();
+  const { run, ...result } = useAsync<Project[]>();
   useEffect(() => {
-    run(client('projects', { data: cleanObject(param) }));
+    // TODO 这里 还要修正一下run(client('projects', { data: cleanObject(param) }));
+    run(client('projects', { data: param }));
   }, [param]);
   return result;
 };
