@@ -1,3 +1,7 @@
+/** @jsx jsx */
+//指定编译器
+import { jsx } from '@emotion/react';
+import { Form, Input, Select } from 'antd';
 import React from 'react';
 import { useEffect, useState } from 'react';
 
@@ -21,10 +25,11 @@ interface SearchPanelProps {
 
 export const SearchPanel = ({ users, param, setParam }: SearchPanelProps) => {
   return (
-    <form>
-      <div>
+    <Form style={{ marginBottom: '2rem' }} layout={'inline'}>
+      <Form.Item>
         {/*setParam(Object.assign({}, param, {name:evt.target.value}))*/}
-        <input
+        <Input
+          placeholder={'项目名'}
           type="text"
           value={param.name}
           onChange={evt =>
@@ -34,23 +39,25 @@ export const SearchPanel = ({ users, param, setParam }: SearchPanelProps) => {
             })
           }
         />
-        <select
-          value={param.personId}
-          onChange={evt =>
-            setParam({
-              ...param,
-              personId: evt.target.value,
-            })
-          }
-        >
-          <option value={''}>负责人</option>
-          {users.map(user => (
-            <option key={user.id} value={user.id}>
-              {user.name}
-            </option>
-          ))}
-        </select>
-      </div>
-    </form>
+        <Form.Item>
+          <Select
+            value={param.personId}
+            onChange={value =>
+              setParam({
+                ...param,
+                personId: value,
+              })
+            }
+          >
+            <Select.Option value={''}>负责人</Select.Option>
+            {users.map(user => (
+              <Select.Option key={user.id} value={user.id}>
+                {user.name}
+              </Select.Option>
+            ))}
+          </Select>
+        </Form.Item>
+      </Form.Item>
+    </Form>
   );
 };

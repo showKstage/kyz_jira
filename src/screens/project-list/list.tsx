@@ -1,4 +1,5 @@
 import { Table } from 'antd';
+import dayjs from 'dayjs';
 import React from 'react';
 import { User } from './search-panel';
 
@@ -8,6 +9,7 @@ interface Project {
   personId: string;
   pin: string;
   organization: string;
+  created: number;
 }
 
 interface ListProps {
@@ -25,6 +27,10 @@ export const List = ({ users, list }: ListProps) => {
           title: '名称',
           dataIndex: 'name',
           sorter: (a, b) => a.name.localeCompare(b.name),
+        },
+        {
+          title: '部门',
+          dataIndex: 'organization',
         },
         {
           title: '负责人',

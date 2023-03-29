@@ -5,6 +5,7 @@ import { List } from './list';
 import qs from 'qs';
 import { cleanObject, useDebounce, useMount } from 'utils';
 import { useHttp } from 'utils/http';
+import styled from '@emotion/styled';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -39,13 +40,18 @@ export const ProjectListScreen = () => {
   }); //自定义useMount这个hook 使得避免每次都在这里加这个空数组
 
   return (
-    <div>
+    <Container>
+      <h1>项目列表</h1>
       <SearchPanel
         users={users}
         param={param}
         setParam={setParam}
       ></SearchPanel>
       <List users={users} list={list}></List>
-    </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  padding:3.2rem;
+`
