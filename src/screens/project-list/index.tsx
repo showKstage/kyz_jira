@@ -2,11 +2,12 @@ import React from 'react';
 import { useState } from 'react';
 import { SearchPanel } from './search-panel';
 import { List } from './list';
-import { useDebounce } from 'utils';
+import { useDebounce, useDocumentTitle } from 'utils';
 import styled from '@emotion/styled';
 import { Typography } from 'antd';
 import { useProjects } from 'utils/project';
 import { useUsers } from './../../utils/user';
+import { Helmet } from 'react-helmet';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -43,9 +44,12 @@ export const ProjectListScreen = () => {
   //   //   }
   //   // });
   // }); //自定义useMount这个hook 使得避免每次都在这里加这个空数组
-
+  useDocumentTitle('项目列表');
   return (
     <Container>
+      {/* <Helmet>
+        <title>项目列表</title>
+      </Helmet> */}
       <h1>项目列表</h1>
       <SearchPanel
         users={users || []}

@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   } = useAsync<User | null>();
 
   const login = (form: AuthForm) =>
-    auth.login(form).then(user => setUser(user));
+  auth.login(form).then(user => setUser(user));
   const register = (form: AuthForm) =>
     auth.register(form).then(user => setUser(user));
   const logout = () => auth.logout().then(() => setUser(null));
