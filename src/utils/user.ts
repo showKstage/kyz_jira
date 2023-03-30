@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
-import { Project } from 'screens/project-list/list';
+import { User } from 'screens/project-list/search-panel';
 import { cleanObject } from 'utils';
 import { useHttp } from './http';
 import { useAsync } from './use-async';
 
-export const useProjects = (param: Partial<Project>) => {
+export const useUsers = (param?: Partial<User>) => {
   const client = useHttp();
-  const { run, ...result } = useAsync<Project[]>();
+  const { run, ...result } = useAsync<User[]>();
   useEffect(() => {
-    run(client('projects', { data: cleanObject(param) }));
+    run(client('projects', { data: cleanObject(param || {}) }));
   }, [param]);
   return result;
 };

@@ -22,11 +22,12 @@ export const useAsync = <D>(initialState?: State<D>) => {
       error: null,
     });
 
-  const setError = (error: Error) => ({
-    error,
-    stat: 'error',
-    data: null,
-  });
+  const setError = (error: Error) =>
+    setState({
+      error,
+      stat: 'error',
+      data: null,
+    });
 
   const run = (promise: Promise<D>) => {
     if (!promise || !promise.then) {
@@ -39,11 +40,12 @@ export const useAsync = <D>(initialState?: State<D>) => {
         return data;
       })
       .catch(error => {
+        //catch会消化异常，如果不主动抛出，外面是接收不到异常的
         setError(error);
-        return error;
+        return Promise.reject(error);
       });
   };
-
+  console.log('isLoading', state.stat);
   return {
     isIdle: state.stat === 'idle',
     isLoading: state.stat === 'loading',

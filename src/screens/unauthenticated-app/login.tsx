@@ -2,9 +2,15 @@ import { useAuth } from 'context/auth-context';
 import React, { FormEvent } from 'react';
 import { Button, Form, Input } from 'antd';
 import { LongButton } from '.';
+import { useAsync } from './../../utils/use-async';
 // const apiUrl = process.env.REACT_APP_API_URL;
-export const LoginScreen = () => {
+export const LoginScreen = ({
+  onError,
+}: {
+  onError: (error: Error) => void; //这里就是相当于定义onError这个函数的类型
+}) => {
   const { login } = useAuth();
+  const { run, isLoading } = useAsync();
   //没引入antd之前的手写方式
   // const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
   //   event.preventDefault(); //阻止表单跳转的默认行为
@@ -14,8 +20,17 @@ export const LoginScreen = () => {
   //     .value;
   //   login({ username, password });
   // };
-  const handleSubmit = (values: { username: string; password: string }) => {
-    login(values);
+  const handleSubmit = async (values: {
+    username: string;
+    password: string;
+  }) => {
+    try {
+      // await login(values);
+      await run(login(values));
+    } catch (e: any) {
+      //TODO
+      onError(e);
+    }
   };
   return (
     <Form onFinish={handleSubmit}>
@@ -31,7 +46,7 @@ export const LoginScreen = () => {
       >
         <Input placeholder={'密码'} type="password" id={'password'} />
       </Form.Item>
-      <LongButton htmlType={'submit'} type={'primary'}>
+      <LongButton loading={isLoading} htmlType={'submit'} type={'primary'}>
         登录
       </LongButton>
     </Form>

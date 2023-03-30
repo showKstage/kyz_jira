@@ -1,6 +1,5 @@
-import { Table, TableProps } from 'antd';
-import dayjs from 'dayjs';
 import React from 'react';
+import { Table, TableProps } from 'antd';
 import { User } from './search-panel';
 
 export interface Project {
